@@ -146,7 +146,7 @@ export default function LoginPage() {
 
                 <Button
                   onClick={handleLogin}
-                  className="w-full bg-campus-green-dark hover:bg-campus-green-light text-white rounded-apple font-medium"
+                  className="w-full bg-black hover:bg-gray-800 text-white rounded-apple font-medium"
                   disabled={!userType || !email || !password}
                 >
                   Login to Campus Hive
@@ -209,7 +209,7 @@ export default function LoginPage() {
 
                     <Button
                       onClick={handleSignup}
-                      className="w-full bg-campus-green-dark hover:bg-campus-green-light text-white rounded-apple font-medium"
+                      className="w-full bg-black hover:bg-gray-800 text-white rounded-apple font-medium"
                       disabled={!userType || !email || !name || !destination}
                     >
                       Sign Up

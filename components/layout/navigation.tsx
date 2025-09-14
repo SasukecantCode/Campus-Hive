@@ -8,7 +8,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Badge } from "@/components/ui/badge"
 import {
   Bell,
-  Search,
+  Moon,
+  Sun,
   Home,
   Calendar,
   Building,
@@ -22,13 +23,17 @@ import {
 
 interface NavigationProps {
   userType: "student" | "mentor" | "warden" | "food-manager"
+  isDarkMode?: boolean
+  onToggleDarkMode?: () => void
 }
 
-export default function Navigation({ userType }: NavigationProps) {
+export default function Navigation({ userType, isDarkMode = false, onToggleDarkMode }: NavigationProps) {
   const [notifications] = useState(3) // Mock notification count
 
   return (
-    <nav className="bg-campus-green-dark text-white shadow-lg sticky top-0 z-50">
+    <nav
+      className={`${isDarkMode ? "bg-gray-900 text-white" : "bg-campus-green-dark text-white"} shadow-lg sticky top-0 z-50`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -47,7 +52,10 @@ export default function Navigation({ userType }: NavigationProps) {
           <div className="hidden md:flex items-center space-x-6">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="text-white hover:bg-campus-green-light rounded-apple">
+                <Button
+                  variant="ghost"
+                  className={`text-white hover:${isDarkMode ? "bg-gray-700" : "bg-campus-green-light"} rounded-apple`}
+                >
                   <Home className="w-4 h-4 mr-2" />
                   Home
                 </Button>
@@ -56,89 +64,144 @@ export default function Navigation({ userType }: NavigationProps) {
                 <DropdownMenuItem>
                   <Link href={`/${userType}`}>Dashboard</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>Announcements</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/announcements">Announcements</Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="text-white hover:bg-campus-green-light rounded-apple">
+                <Button
+                  variant="ghost"
+                  className={`text-white hover:${isDarkMode ? "bg-gray-700" : "bg-campus-green-light"} rounded-apple`}
+                >
                   <Calendar className="w-4 h-4 mr-2" />
                   Events
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="rounded-apple">
-                <DropdownMenuItem>View Calendar</DropdownMenuItem>
-                <DropdownMenuItem>Upcoming Events</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/events/calendar">View Calendar</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/events/upcoming">Upcoming Events</Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="text-white hover:bg-campus-green-light rounded-apple">
+                <Button
+                  variant="ghost"
+                  className={`text-white hover:${isDarkMode ? "bg-gray-700" : "bg-campus-green-light"} rounded-apple`}
+                >
                   <Building className="w-4 h-4 mr-2" />
                   Hostel
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="rounded-apple">
-                <DropdownMenuItem>Entry/Exit Logs</DropdownMenuItem>
-                <DropdownMenuItem>Leave Requests</DropdownMenuItem>
-                <DropdownMenuItem>Complaints</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/hostel/entry-exit-logs">Entry/Exit Logs</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/hostel/leave-requests">Leave Requests</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/hostel/complaints">Complaints</Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="text-white hover:bg-campus-green-light rounded-apple">
+                <Button
+                  variant="ghost"
+                  className={`text-white hover:${isDarkMode ? "bg-gray-700" : "bg-campus-green-light"} rounded-apple`}
+                >
                   <GraduationCap className="w-4 h-4 mr-2" />
                   Academics
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="rounded-apple">
-                <DropdownMenuItem>Timetable</DropdownMenuItem>
-                <DropdownMenuItem>Study Material</DropdownMenuItem>
-                <DropdownMenuItem>Assignments</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/academics/timetable">Timetable</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/academics/study-material">Study Material</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/academics/assignments">Assignments</Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="text-white hover:bg-campus-green-light rounded-apple">
+                <Button
+                  variant="ghost"
+                  className={`text-white hover:${isDarkMode ? "bg-gray-700" : "bg-campus-green-light"} rounded-apple`}
+                >
                   <Shirt className="w-4 h-4 mr-2" />
                   Laundry
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="rounded-apple">
-                <DropdownMenuItem>Book Slot</DropdownMenuItem>
-                <DropdownMenuItem>Track Order</DropdownMenuItem>
-                <DropdownMenuItem>Complaints</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/laundry/book-slot">Book Slot</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/laundry/track-order">Track Order</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/laundry/complaints">Complaints</Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="text-white hover:bg-campus-green-light rounded-apple">
+                <Button
+                  variant="ghost"
+                  className={`text-white hover:${isDarkMode ? "bg-gray-700" : "bg-campus-green-light"} rounded-apple`}
+                >
                   <UtensilsCrossed className="w-4 h-4 mr-2" />
                   Cafeteria
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="rounded-apple">
-                <DropdownMenuItem>Menu</DropdownMenuItem>
-                <DropdownMenuItem>Meal Booking</DropdownMenuItem>
-                <DropdownMenuItem>Feedback</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/cafeteria/menu">Menu</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/cafeteria/meal-booking">Meal Booking</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/cafeteria/feedback">Feedback</Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Button variant="ghost" className="text-white hover:bg-campus-green-light rounded-apple">
-              <MessageSquare className="w-4 h-4 mr-2" />
-              Grievances
+            <Button
+              variant="ghost"
+              className={`text-white hover:${isDarkMode ? "bg-gray-700" : "bg-campus-green-light"} rounded-apple`}
+            >
+              <Link href="/grievances" className="flex items-center">
+                <MessageSquare className="w-4 h-4 mr-2" />
+                Grievances
+              </Link>
             </Button>
           </div>
 
           {/* Right Side Icons */}
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="text-white hover:bg-campus-green-light rounded-apple">
-              <Search className="w-4 h-4" />
+            <Button
+              variant="ghost"
+              size="sm"
+              className={`text-white hover:${isDarkMode ? "bg-gray-700" : "bg-campus-green-light"} rounded-apple`}
+              onClick={onToggleDarkMode}
+            >
+              {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
 
             <DropdownMenu>
@@ -146,7 +209,7 @@ export default function Navigation({ userType }: NavigationProps) {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-white hover:bg-campus-green-light rounded-apple relative"
+                  className={`text-white hover:${isDarkMode ? "bg-gray-700" : "bg-campus-green-light"} rounded-apple relative`}
                 >
                   <Bell className="w-4 h-4" />
                   {notifications > 0 && (
@@ -165,16 +228,26 @@ export default function Navigation({ userType }: NavigationProps) {
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="text-white hover:bg-campus-green-light rounded-apple">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={`text-white hover:${isDarkMode ? "bg-gray-700" : "bg-campus-green-light"} rounded-apple`}
+                >
                   <User className="w-4 h-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="rounded-apple">
-                <DropdownMenuItem>My Profile</DropdownMenuItem>
-                <DropdownMenuItem>Settings</DropdownMenuItem>
                 <DropdownMenuItem>
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Logout
+                  <Link href="/profile">My Profile</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/settings">Settings</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/" className="flex items-center">
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Logout
+                  </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
