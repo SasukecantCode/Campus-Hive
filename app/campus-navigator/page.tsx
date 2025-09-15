@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
-import { MapPin, NavigationIcon, Search, Clock, Phone } from "lucide-react"
+import { MapPin, NavigationIcon, Search, Clock, Phone, Wifi, ExternalLink } from "lucide-react"
 
 export default function CampusNavigatorPage() {
   const [userType] = useState<"student" | "mentor" | "warden" | "food-manager">("student")
@@ -272,6 +272,19 @@ export default function CampusNavigatorPage() {
                   <NavigationIcon className="w-4 h-4 mr-2" />
                   Get Directions
                 </Button>
+                <Button
+                  variant="outline"
+                  className="w-full rounded-apple bg-transparent"
+                  onClick={() =>
+                    window.open(
+                      "https://v0.app/chat/campus-navigation-system-kDZODM8CMTD?b=v0-preview-b_OaTvNPirBHm&path=%2F&f=1",
+                      "_blank",
+                    )
+                  }
+                >
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  Advanced Navigator
+                </Button>
                 <Button variant="outline" className="w-full rounded-apple bg-transparent">
                   Report Issue
                 </Button>
@@ -281,6 +294,75 @@ export default function CampusNavigatorPage() {
               </CardContent>
             </Card>
           </div>
+        </div>
+
+        {/* Crowd Management System section */}
+        <div id="crowd-management" className="mt-12">
+          <Card className={`${isDarkMode ? "bg-gray-800 border-gray-700" : "bg-white"} rounded-apple shadow-lg`}>
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <Wifi className="w-6 h-6 text-campus-green-dark" />
+                <span>Crowd Management System</span>
+              </CardTitle>
+              <p className="text-gray-600">
+                Real-time crowd density monitoring using WiFi ping data from campus routers
+              </p>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Ping Image Placeholder */}
+                <div className="flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 rounded-apple p-8">
+                  <div className="text-center">
+                    <div className="w-32 h-32 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center">
+                      <Wifi className="w-16 h-16 text-white" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2">WiFi Ping Monitoring</h3>
+                    <p className="text-sm text-gray-600">Live data from campus router connections</p>
+                  </div>
+                </div>
+
+                {/* System Information */}
+                <div className="space-y-4">
+                  <div className="p-4 bg-green-50 rounded-apple border border-green-200">
+                    <h4 className="font-semibold text-green-800 mb-2">How it Works</h4>
+                    <p className="text-sm text-green-700">
+                      This system uses WiFi pings and takes data from the number of devices connected to routers in each
+                      campus region to provide real-time crowd density information.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="p-3 bg-blue-50 rounded-apple text-center">
+                      <div className="text-2xl font-bold text-blue-600">247</div>
+                      <div className="text-sm text-blue-800">Active Devices</div>
+                    </div>
+                    <div className="p-3 bg-purple-50 rounded-apple text-center">
+                      <div className="text-2xl font-bold text-purple-600">12</div>
+                      <div className="text-sm text-purple-800">Router Zones</div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="font-semibold">Current Density Levels:</h4>
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center p-2 bg-red-50 rounded">
+                        <span className="text-sm">Food Court</span>
+                        <Badge className="bg-red-500 text-white">High</Badge>
+                      </div>
+                      <div className="flex justify-between items-center p-2 bg-yellow-50 rounded">
+                        <span className="text-sm">Library</span>
+                        <Badge className="bg-yellow-500 text-white">Medium</Badge>
+                      </div>
+                      <div className="flex justify-between items-center p-2 bg-green-50 rounded">
+                        <span className="text-sm">Sports Complex</span>
+                        <Badge className="bg-green-500 text-white">Low</Badge>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

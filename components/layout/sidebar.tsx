@@ -19,6 +19,8 @@ import {
   ClipboardList,
   MapPin,
   Users,
+  Wifi,
+  ExternalLink,
 } from "lucide-react"
 
 interface SidebarProps {
@@ -95,6 +97,23 @@ export default function Sidebar({ userType }: SidebarProps) {
       icon: Home,
       href: `/student`,
       children: [],
+    },
+    {
+      id: "external-navigator",
+      label: "Campus Navigator (External)",
+      icon: ExternalLink,
+      href: "https://v0.app/chat/campus-navigation-system-kDZODM8CMTD?b=v0-preview-b_OaTvNPirBHm&path=%2F&f=1",
+      children: [],
+      external: true,
+    },
+    {
+      id: "crowd-management",
+      label: "Crowd Management",
+      icon: Wifi,
+      href: "#crowd-management",
+      children: [],
+      tooltip:
+        "This system uses wifi Pings and takes data from the Number of devices connected to the routers in that region",
     },
     {
       id: "academics",
@@ -361,6 +380,27 @@ export default function Sidebar({ userType }: SidebarProps) {
                       </div>
                     )}
                   </div>
+                ) : item.external ? (
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-left rounded-apple hover:bg-campus-cream"
+                    onClick={() => window.open(item.href, "_blank")}
+                  >
+                    <item.icon className="w-4 h-4 mr-3" />
+                    {item.label}
+                  </Button>
+                ) : item.href?.startsWith("#") ? (
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-left rounded-apple hover:bg-campus-cream"
+                    onClick={() =>
+                      document.getElementById(item.href.substring(1))?.scrollIntoView({ behavior: "smooth" })
+                    }
+                    title={item.tooltip}
+                  >
+                    <item.icon className="w-4 h-4 mr-3" />
+                    {item.label}
+                  </Button>
                 ) : (
                   <Link href={item.href || "#"}>
                     <Button

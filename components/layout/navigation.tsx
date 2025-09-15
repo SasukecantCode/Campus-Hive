@@ -19,6 +19,8 @@ import {
   MessageSquare,
   User,
   LogOut,
+  Wifi,
+  ExternalLink,
 } from "lucide-react"
 
 interface NavigationProps {
@@ -50,6 +52,30 @@ export default function Navigation({ userType, isDarkMode = false, onToggleDarkM
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-6">
+            <Button
+              variant="ghost"
+              className={`text-white hover:${isDarkMode ? "bg-gray-700" : "bg-campus-green-light"} rounded-apple`}
+              onClick={() =>
+                window.open(
+                  "https://v0.app/chat/campus-navigation-system-kDZODM8CMTD?b=v0-preview-b_OaTvNPirBHm&path=%2F&f=1",
+                  "_blank",
+                )
+              }
+            >
+              <ExternalLink className="w-4 h-4 mr-2" />
+              Campus Navigator
+            </Button>
+
+            <Button
+              variant="ghost"
+              className={`text-white hover:${isDarkMode ? "bg-gray-700" : "bg-campus-green-light"} rounded-apple`}
+              onClick={() => document.getElementById("crowd-management")?.scrollIntoView({ behavior: "smooth" })}
+              title="This system uses wifi Pings and takes data from the Number of devices connected to the routers in that region"
+            >
+              <Wifi className="w-4 h-4 mr-2" />
+              Crowd Management
+            </Button>
+
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
